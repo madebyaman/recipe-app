@@ -18,7 +18,8 @@ async function controlRecipes() {
     // Rendering data
     recipeView.render(recipe);
   } catch (err) {
-    alert(err);
+    console.log('catching');
+    recipeView.renderErrorMessage(err);
   }
 }
 

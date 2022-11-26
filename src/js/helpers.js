@@ -2,7 +2,7 @@ import { TIMEOUT_SECS } from './config';
 
 export async function getJSON(url) {
   try {
-    const res = await Promise.race([(fetch(url), timeout(TIMEOUT_SECS))]);
+    const res = await fetch(url);
     const data = await res.json();
     if (!res.ok) throw new Error(`${data.message} (${res.status})`);
     return data;
