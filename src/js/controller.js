@@ -4,6 +4,7 @@ import 'regenerator-runtime/runtime';
 import { state, loadRecipe, loadSearchResults } from './model.js';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
+import resultsView from './views/resultsView.js';
 dotenv.config();
 
 async function controlRecipes() {
@@ -26,8 +27,10 @@ async function controlRecipes() {
 
 async function controlSearch() {
   try {
+    resultsView.renderSpinner();
     const query = searchView.getQuery();
     await loadSearchResults(query);
+    resultsView.render(state.search.results);
   } catch (err) {
     console.error(err);
   }
