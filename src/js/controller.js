@@ -7,6 +7,10 @@ import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
 dotenv.config();
 
+if (module.hot) {
+  module.hot.accept();
+}
+
 async function controlRecipes() {
   try {
     const id = window.location.hash.slice(1);

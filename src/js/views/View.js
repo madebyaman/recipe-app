@@ -3,6 +3,9 @@ export default class View {
   _data;
 
   render(data) {
+    if (!data || !data.length) {
+      return this.renderErrorMessage('No data');
+    }
     this._data = data;
     const markup = this._generateMarkup();
     this._clear();
