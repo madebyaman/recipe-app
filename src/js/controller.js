@@ -1,8 +1,9 @@
 import dotenv from 'dotenv';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
-import { state, loadRecipe } from './model.js';
+import { state, loadRecipe, loadSearchResults } from './model.js';
 import recipeView from './views/recipeView.js';
+import searchView from './views/searchView.js';
 dotenv.config();
 
 async function controlRecipes() {
@@ -23,7 +24,17 @@ async function controlRecipes() {
   }
 }
 
+async function controlSearch() {
+  try {
+    const query = searchView.getQuery();
+    await loadSearchResults(query);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 function init() {
   recipeView.addHandlerRender(controlRecipes);
+  searchView.addSearchHandler(controlSearch);
 }
 init();
